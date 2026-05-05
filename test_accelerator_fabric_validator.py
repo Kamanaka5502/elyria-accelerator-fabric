@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 from pathlib import Path
 
-from accelerator_fabric_validator import EXECUTE, REFUSE, HALT, THROTTLE, REVOKE_DISPATCH, evaluate, load_json
+from accelerator_fabric_validator import (
+    EXECUTE,
+    REFUSE,
+    HALT,
+    THROTTLE,
+    REVOKE_DISPATCH,
+    evaluate,
+    load_json,
+)
 
 EX = Path("examples")
 
@@ -11,6 +19,7 @@ def test_valid_executes():
     assert decision.boundary_outcome == EXECUTE
     assert decision.dispatch_allowed is True
     assert decision.fabric_action == "ALLOW_DISPATCH"
+    assert decision.input_hash.startswith("sha256:")
     assert decision.receipt_hash.startswith("sha256:")
     assert decision.replay_token.startswith("sha256:")
 
@@ -53,6 +62,7 @@ def test_capacity_degraded_throttles():
 def test_same_input_replays_same_receipt():
     a = evaluate(load_json(EX / "valid_inference_workload.json"))
     b = evaluate(load_json(EX / "valid_inference_workload.json"))
+    assert a.input_hash == b.input_hash
     assert a.receipt_hash == b.receipt_hash
     assert a.replay_token == b.replay_token
 
