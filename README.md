@@ -17,7 +17,7 @@ Copyright (c) 2026 **Samantha Revita** and **Terry Snyder**. All rights reserved
 
 This repository is a **protected public proof surface**. It is **not open source**.
 
-![Elyria Accelerator Fabric](assets/accelerator_fabric_15d_hero.svg)
+![Elyria Accelerator Fabric](assets/accelerator_fabric_cosmic_gate_hero.svg)
 
 ## Core claim
 
