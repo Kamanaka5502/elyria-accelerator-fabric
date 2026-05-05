@@ -1,0 +1,23 @@
+# Proprietary License and Use Restrictions
+
+Copyright (c) 2026 Samantha Revita and Terry Snyder. All rights reserved.
+
+This repository is provided as a protected public proof surface for Elyria Accelerator Fabric under Elyria Systems — VA.
+
+No open-source license is granted.
+
+## Permitted use
+
+You may view the public repository contents for evaluation, review, and discussion.
+
+## Prohibited use
+
+Without prior written authorization, you may not copy, reproduce, redistribute, modify, fork, adapt, create derivative works, deploy, reverse engineer, train models on, benchmark competing systems from, commercialize, sublicense, repackage, or transfer this work or its category claim.
+
+## Protected scope
+
+Private runtime law, protected SMC implementation, fabric enforcement internals, customer-specific corridors, production adapters, private schemas, receipt/replay internals, and deployment-sensitive architecture remain proprietary.
+
+## No warranty
+
+This repository is provided as-is for limited review. No warranty, license, or implied commercial right is granted.
