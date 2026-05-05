@@ -57,6 +57,21 @@ def test_same_input_replays_same_receipt():
     assert a.replay_token == b.replay_token
 
 
+def run_all_tests():
+    tests = [
+        test_valid_executes,
+        test_revoked_refuses,
+        test_thermal_halts,
+        test_replay_missing_halts,
+        test_standing_decay_revokes,
+        test_capacity_degraded_throttles,
+        test_same_input_replays_same_receipt,
+    ]
+    for test in tests:
+        test()
+        print(f"PASS {test.__name__}")
+    print("ALL ACCELERATOR FABRIC PROOFS PASSED")
+
+
 if __name__ == "__main__":
-    import pytest
-    raise SystemExit(pytest.main([__file__, "-q"]))
+    run_all_tests()
