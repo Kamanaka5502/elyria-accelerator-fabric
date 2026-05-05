@@ -1,4 +1,4 @@
-name: Elyria Accelerator Fabric Proof
+name: Elyria Accelerator Fabric Public Surface Check
 
 on:
   push:
@@ -11,25 +11,32 @@ permissions:
   contents: read
 
 jobs:
-  proof:
-    name: accelerator-fabric-proof
+  public-surface:
+    name: protected-public-surface-check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Run valid workload
-        run: python accelerator_fabric_validator.py examples/valid_inference_workload.json
-      - name: Run revoked authority workload
-        run: python accelerator_fabric_validator.py examples/revoked_authority_workload.json
-      - name: Run thermal halt workload
-        run: python accelerator_fabric_validator.py examples/thermal_halt_workload.json
-      - name: Run replay missing workload
-        run: python accelerator_fabric_validator.py examples/replay_missing_workload.json
-      - name: Run standing decay workload
-        run: python accelerator_fabric_validator.py examples/standing_decay_workload.json
-      - name: Run tests
-        run: python test_accelerator_fabric_validator.py
+      - name: Confirm protected surface files exist
+        run: |
+          test -f README.md
+          test -f PROOF_REPORT.md
+          test -f PROTECTED_SCOPE.md
+          test -f NON_IMPLEMENTATION_BOUNDARY.md
+          test -f COMMERCIAL_ACCESS.md
+          test -f assets/accelerator_fabric_cosmic_gate_hero.svg
+      - name: Confirm no public implementation files are exposed
+        run: |
+          test ! -f accelerator_fabric_validator.py
+          test ! -f test_accelerator_fabric_validator.py
+      - name: Confirm protected boundary language
+        run: |
+          grep -q "protected public proof surface" README.md
+          grep -q "No open-source license is granted" LICENSE
+          grep -q "Do not disclose the machinery" README.md
+          grep -q "private runtime law" PROTECTED_SCOPE.md
+      - name: Confirm public claim remains bounded
+        run: |
+          grep -q "GPU availability is not execution admissibility" README.md
+          grep -q "NVIDIA partnership" README.md
+          grep -q "not open source" README.md
