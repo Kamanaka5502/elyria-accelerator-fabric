@@ -1,0 +1,126 @@
+<svg width="1800" height="1000" viewBox="0 0 1800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="space" x1="0" y1="0" x2="1800" y2="1000">
+      <stop offset="0" stop-color="#03040a"/>
+      <stop offset="0.38" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#140b1f"/>
+    </linearGradient>
+    <radialGradient id="nebulaA" cx="32%" cy="48%" r="48%">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.34"/>
+      <stop offset="0.38" stop-color="#1d4ed8" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#020617" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebulaB" cx="70%" cy="48%" r="44%">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity="0.38"/>
+      <stop offset="0.36" stop-color="#7c2d12" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#020617" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7d6"/>
+      <stop offset="0.36" stop-color="#d8b76a"/>
+      <stop offset="0.72" stop-color="#9f6d23"/>
+      <stop offset="1" stop-color="#4a2f08"/>
+    </linearGradient>
+    <linearGradient id="stream" x1="520" y1="500" x2="1280" y2="500">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.36" stop-color="#f8e7b0"/>
+      <stop offset="0.68" stop-color="#fb923c"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#000000" flood-opacity="0.72"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="circuit" width="92" height="92" patternUnits="userSpaceOnUse">
+      <path d="M0 46H30M62 46H92M46 0V30M46 62V92" stroke="#334155" stroke-width="1" opacity="0.32"/>
+      <circle cx="46" cy="46" r="2.5" fill="#d8b76a" opacity="0.36"/>
+      <rect x="32" y="32" width="28" height="28" rx="3" stroke="#1e40af" stroke-width="1" opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <rect width="1800" height="1000" fill="url(#space)"/>
+  <rect width="1800" height="1000" fill="url(#nebulaA)"/>
+  <rect width="1800" height="1000" fill="url(#nebulaB)"/>
+  <rect width="1800" height="1000" fill="url(#circuit)" opacity="0.42"/>
+
+  <g opacity="0.95">
+    <circle cx="162" cy="202" r="2" fill="#f8e7b0"/><circle cx="244" cy="754" r="2" fill="#38bdf8"/><circle cx="375" cy="128" r="1.8" fill="#fff7d6"/>
+    <circle cx="1480" cy="196" r="2" fill="#fb923c"/><circle cx="1594" cy="760" r="2" fill="#38bdf8"/><circle cx="1138" cy="112" r="1.7" fill="#fff7d6"/>
+    <circle cx="854" cy="184" r="2" fill="#22c55e"/><circle cx="956" cy="814" r="1.8" fill="#fff7d6"/><circle cx="672" cy="852" r="2" fill="#fb923c"/>
+  </g>
+
+  <rect x="58" y="54" width="1684" height="892" rx="38" stroke="#334155" stroke-width="2"/>
+  <rect x="90" y="86" width="1620" height="828" rx="28" stroke="#111827" stroke-width="2"/>
+
+  <text x="112" y="130" font-family="Inter, Arial, sans-serif" font-size="43" fill="#f8fafc" font-weight="950" letter-spacing="1.5">ELYRIA ACCELERATOR FABRIC</text>
+  <text x="114" y="169" font-family="Inter, Arial, sans-serif" font-size="17" fill="#f8e7b0" font-weight="850">15D+ PRE-DISPATCH ADMISSIBILITY BOUNDARY FOR ACCELERATOR-BOUND AI WORKLOADS</text>
+  <text x="114" y="199" font-family="Inter, Arial, sans-serif" font-size="13" fill="#94a3b8">SMC witness · thermo-standing · corridor law · standing decay · deterministic receipt/replay · fail-closed dispatch</text>
+
+  <g transform="translate(1242 105)" filter="url(#shadow)">
+    <rect width="430" height="68" rx="20" fill="#050814" stroke="url(#gold)" stroke-width="2"/>
+    <text x="215" y="42" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" fill="#f8e7b0" font-weight="950">PROTECTED PUBLIC PROOF SURFACE</text>
+  </g>
+
+  <g transform="translate(246 310)" filter="url(#shadow)">
+    <ellipse cx="190" cy="235" rx="210" ry="260" fill="#07111f" opacity="0.86" stroke="#38bdf8" stroke-width="2"/>
+    <ellipse cx="190" cy="235" rx="245" ry="300" stroke="#38bdf8" stroke-width="2" opacity="0.35"/>
+    <path d="M135 48 L245 48 L290 420 L190 492 L90 420 Z" fill="#050814" stroke="url(#gold)" stroke-width="3"/>
+    <path d="M190 72 V452" stroke="#d8b76a" stroke-width="3" opacity="0.65"/>
+    <path d="M120 150 H260M108 225H272M112 300H268" stroke="#334155" stroke-width="2"/>
+    <circle cx="190" cy="247" r="38" fill="#f8e7b0" opacity="0.95" filter="url(#glow)"/>
+    <text x="190" y="548" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" fill="#f8fafc" font-weight="950">WORKLOAD ENVELOPE</text>
+    <text x="190" y="579" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#cbd5e1">request · tenant · model · data · corridor</text>
+  </g>
+
+  <g opacity="0.88" filter="url(#glow)">
+    <path d="M546 487 C660 398, 770 410, 884 500 C1004 595, 1114 604, 1254 498" stroke="url(#stream)" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M546 528 C666 474, 750 552, 872 568 C1008 586, 1124 536, 1254 548" stroke="#38bdf8" stroke-width="2.2" fill="none" opacity="0.58"/>
+    <path d="M546 444 C664 516, 770 346, 900 398 C1046 456, 1116 410, 1254 438" stroke="#f8e7b0" stroke-width="2" fill="none" opacity="0.46"/>
+    <text x="900" y="362" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" fill="#f8e7b0" font-weight="900">CAUSAL DISPATCH STREAM</text>
+  </g>
+
+  <g transform="translate(900 515)" filter="url(#shadow)">
+    <circle r="142" fill="#050814" stroke="#334155" stroke-width="2"/>
+    <circle r="116" stroke="url(#gold)" stroke-width="3"/>
+    <circle r="82" stroke="#38bdf8" stroke-width="2" opacity="0.55"/>
+    <circle r="45" fill="#111827" stroke="#d8b76a" stroke-width="2"/>
+    <circle r="14" fill="#f8e7b0" filter="url(#glow)"/>
+    <path d="M0 -142 L30 -55 L116 -82 L56 0 L116 82 L30 55 L0 142 L-30 55 L-116 82 L-56 0 L-116 -82 L-30 -55 Z" stroke="url(#stream)" stroke-width="2.5" fill="none"/>
+    <text y="-13" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" fill="#f8fafc" font-weight="950">15D+</text>
+    <text y="20" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" fill="#f8e7b0" font-weight="950">STANDING</text>
+    <text y="48" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" fill="#94a3b8">RESOLVER</text>
+  </g>
+
+  <g transform="translate(1248 278)" filter="url(#shadow)">
+    <circle cx="235" cy="270" r="260" fill="#060914" opacity="0.92" stroke="#d8b76a" stroke-width="3"/>
+    <circle cx="235" cy="270" r="216" stroke="#fb923c" stroke-width="2" opacity="0.54"/>
+    <circle cx="235" cy="270" r="170" stroke="#38bdf8" stroke-width="1.6" opacity="0.42"/>
+    <circle cx="235" cy="270" r="112" fill="#111827" stroke="url(#gold)" stroke-width="3"/>
+    <circle cx="235" cy="270" r="54" fill="#050814" stroke="#f8e7b0" stroke-width="3"/>
+    <circle cx="235" cy="270" r="20" fill="#f8e7b0" filter="url(#glow)"/>
+    <g stroke="url(#gold)" stroke-width="4" opacity="0.78">
+      <path d="M235 10V74M235 466V530M-25 270H39M431 270H495M51 86L96 131M374 409L419 454M419 86L374 131M96 409L51 454"/>
+    </g>
+    <text x="235" y="585" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" fill="#f8fafc" font-weight="950">FABRIC DECISION ENGINE</text>
+    <text x="235" y="616" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#cbd5e1">execute · refuse · halt · throttle · revoke</text>
+  </g>
+
+  <g font-family="Inter, Arial, sans-serif" font-size="13" font-weight="950">
+    <rect x="126" y="796" width="248" height="62" rx="17" fill="#050814" stroke="#334155"/>
+    <text x="250" y="822" text-anchor="middle" fill="#f8fafc">SMC WITNESS</text><text x="250" y="845" text-anchor="middle" fill="#94a3b8" font-size="11">fabric enforcement anchor</text>
+    <rect x="402" y="796" width="248" height="62" rx="17" fill="#050814" stroke="#334155"/>
+    <text x="526" y="822" text-anchor="middle" fill="#f8fafc">THERMO-STANDING</text><text x="526" y="845" text-anchor="middle" fill="#94a3b8" font-size="11">capacity carries burden</text>
+    <rect x="678" y="796" width="248" height="62" rx="17" fill="#050814" stroke="#334155"/>
+    <text x="802" y="822" text-anchor="middle" fill="#f8fafc">CORRIDOR LAW</text><text x="802" y="845" text-anchor="middle" fill="#94a3b8" font-size="11">tenant · model · route</text>
+    <rect x="954" y="796" width="248" height="62" rx="17" fill="#050814" stroke="#334155"/>
+    <text x="1078" y="822" text-anchor="middle" fill="#f8fafc">RECEIPT / REPLAY</text><text x="1078" y="845" text-anchor="middle" fill="#94a3b8" font-size="11">decision proof persists</text>
+    <rect x="1230" y="796" width="248" height="62" rx="17" fill="#050814" stroke="#334155"/>
+    <text x="1354" y="822" text-anchor="middle" fill="#f8fafc">STANDING DECAY</text><text x="1354" y="845" text-anchor="middle" fill="#94a3b8" font-size="11">revokes before collapse</text>
+  </g>
+
+  <rect x="118" y="892" width="1564" height="54" rx="19" fill="#050814" stroke="url(#gold)" stroke-width="1.8"/>
+  <text x="900" y="927" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#f8e7b0">GPU availability is not execution admissibility.</text>
+</svg>
