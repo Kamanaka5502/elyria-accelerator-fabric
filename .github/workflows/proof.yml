@@ -1,0 +1,35 @@
+name: Elyria Accelerator Fabric Proof
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    name: accelerator-fabric-proof
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run valid workload
+        run: python accelerator_fabric_validator.py examples/valid_inference_workload.json
+      - name: Run revoked authority workload
+        run: python accelerator_fabric_validator.py examples/revoked_authority_workload.json
+      - name: Run thermal halt workload
+        run: python accelerator_fabric_validator.py examples/thermal_halt_workload.json
+      - name: Run replay missing workload
+        run: python accelerator_fabric_validator.py examples/replay_missing_workload.json
+      - name: Run standing decay workload
+        run: python accelerator_fabric_validator.py examples/standing_decay_workload.json
+      - name: Run tests
+        run: python test_accelerator_fabric_validator.py
