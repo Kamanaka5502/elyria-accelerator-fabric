@@ -3,7 +3,8 @@
 Elyria Accelerator Fabric Validator
 
 Protected public proof surface.
-This is a software-adjacent proof validator, not the protected production runtime.
+This file is a software-adjacent public validator for the proof corridor.
+It is not the protected production runtime, not CUDA integration, and not SMC hardware.
 """
 from __future__ import annotations
 
@@ -19,19 +20,33 @@ REFUSE = "REFUSE"
 ESCALATE = "ESCALATE"
 HALT = "HALT"
 THROTTLE = "THROTTLE"
-FENCE = "FENCE"
-QUARANTINE = "QUARANTINE"
 REVOKE_DISPATCH = "REVOKE_DISPATCH"
-REBOUND = "REBOUND"
 
 REQUIRED_FIELDS = [
-    "workload_id", "tenant_id", "actor_id", "model_id", "model_risk_class",
-    "requested_action", "data_classification", "authority_state", "custody_state",
-    "policy_state", "revocation_status", "corridor_id", "gpu_partition",
-    "fabric_domain", "capacity_state", "thermal_state", "energy_debt_state",
-    "scheduler_integrity", "standing_decay_state", "replay_reference",
-    "receipt_parent", "issued_at",
+    "workload_id",
+    "tenant_id",
+    "actor_id",
+    "model_id",
+    "model_risk_class",
+    "requested_action",
+    "data_classification",
+    "authority_state",
+    "custody_state",
+    "policy_state",
+    "revocation_status",
+    "corridor_id",
+    "gpu_partition",
+    "fabric_domain",
+    "capacity_state",
+    "thermal_state",
+    "energy_debt_state",
+    "scheduler_integrity",
+    "standing_decay_state",
+    "replay_reference",
+    "receipt_parent",
+    "issued_at",
 ]
+
 
 @dataclass(frozen=True)
 class FabricDecision:
@@ -42,13 +57,17 @@ class FabricDecision:
     fabric_action: str
     missing_fields: List[str]
     standing_summary: Dict[str, str]
+    input_hash: str
     receipt_hash: str
     replay_token: str
 
 
+def canonical_json(payload: Dict[str, Any]) -> str:
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+
 def canonical_hash(payload: Dict[str, Any]) -> str:
-    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
-    return "sha256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return "sha256:" + hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
 def load_json(path: Path) -> Dict[str, Any]:
@@ -56,9 +75,29 @@ def load_json(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
+def _standing_summary(payload: Dict[str, Any]) -> Dict[str, str]:
+    return {
+        "authority": str(payload.get("authority_state", "MISSING")),
+        "custody": str(payload.get("custody_state", "MISSING")),
+        "policy": str(payload.get("policy_state", "MISSING")),
+        "revocation": str(payload.get("revocation_status", "MISSING")),
+        "capacity": str(payload.get("capacity_state", "MISSING")),
+        "thermal": str(payload.get("thermal_state", "MISSING")),
+        "energy_debt": str(payload.get("energy_debt_state", "MISSING")),
+        "scheduler": str(payload.get("scheduler_integrity", "MISSING")),
+        "standing_decay": str(payload.get("standing_decay_state", "MISSING")),
+        "replay": "PRESENT" if payload.get("replay_reference") else "MISSING",
+    }
+
+
 def evaluate(payload: Dict[str, Any]) -> FabricDecision:
     missing = [field for field in REQUIRED_FIELDS if field not in payload]
     workload_id = str(payload.get("workload_id", "UNKNOWN"))
+
+    outcome = EXECUTE
+    reason = "ACCELERATOR_STANDING_ADMISSIBLE"
+    action = "ALLOW_DISPATCH"
+    dispatch = True
 
     if missing:
         outcome, reason, action, dispatch = ESCALATE, "MISSING_REQUIRED_FIELDS", "REVIEW_REQUIRED", False
@@ -86,34 +125,35 @@ def evaluate(payload: Dict[str, Any]) -> FabricDecision:
         outcome, reason, action, dispatch = REVOKE_DISPATCH, "STANDING_DECAY_ACTIVE", "REVOKE_OR_REBOUND", False
     elif not payload.get("replay_reference"):
         outcome, reason, action, dispatch = HALT, "REPLAY_REFERENCE_MISSING", "BLOCK_CERTIFICATION", False
-    else:
-        outcome, reason, action, dispatch = EXECUTE, "ACCELERATOR_STANDING_ADMISSIBLE", "ALLOW_DISPATCH", True
 
-    standing_summary = {
-        "authority": str(payload.get("authority_state", "MISSING")),
-        "custody": str(payload.get("custody_state", "MISSING")),
-        "policy": str(payload.get("policy_state", "MISSING")),
-        "revocation": str(payload.get("revocation_status", "MISSING")),
-        "capacity": str(payload.get("capacity_state", "MISSING")),
-        "thermal": str(payload.get("thermal_state", "MISSING")),
-        "energy_debt": str(payload.get("energy_debt_state", "MISSING")),
-        "scheduler": str(payload.get("scheduler_integrity", "MISSING")),
-        "standing_decay": str(payload.get("standing_decay_state", "MISSING")),
-        "replay": "PRESENT" if payload.get("replay_reference") else "MISSING",
-    }
-
+    input_hash = canonical_hash(payload)
     receipt_payload = {
         "workload_id": workload_id,
         "boundary_outcome": outcome,
         "dispatch_allowed": dispatch,
         "reason_code": reason,
         "fabric_action": action,
-        "input_hash": canonical_hash(payload),
+        "input_hash": input_hash,
     }
     receipt_hash = canonical_hash(receipt_payload)
-    replay_token = canonical_hash({"receipt_hash": receipt_hash, "receipt_parent": payload.get("receipt_parent")})
+    replay_token = canonical_hash({
+        "receipt_hash": receipt_hash,
+        "receipt_parent": payload.get("receipt_parent"),
+        "corridor_id": payload.get("corridor_id"),
+    })
 
-    return FabricDecision(workload_id, outcome, dispatch, reason, action, missing, standing_summary, receipt_hash, replay_token)
+    return FabricDecision(
+        workload_id=workload_id,
+        boundary_outcome=outcome,
+        dispatch_allowed=dispatch,
+        reason_code=reason,
+        fabric_action=action,
+        missing_fields=missing,
+        standing_summary=_standing_summary(payload),
+        input_hash=input_hash,
+        receipt_hash=receipt_hash,
+        replay_token=replay_token,
+    )
 
 
 def main() -> int:
@@ -124,8 +164,12 @@ def main() -> int:
 
     decision = evaluate(load_json(args.path))
     output = asdict(decision)
-    print(json.dumps(output, sort_keys=True, separators=(",", ":")) if args.compact else json.dumps(output, indent=2, sort_keys=True))
+    if args.compact:
+        print(json.dumps(output, sort_keys=True, separators=(",", ":")))
+    else:
+        print(json.dumps(output, indent=2, sort_keys=True))
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
