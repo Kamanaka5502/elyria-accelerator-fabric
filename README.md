@@ -1,135 +1,180 @@
 # Elyria Accelerator Fabric
 
-![Status](https://img.shields.io/badge/status-protected_public_proof_surface-blue)
-![Open Source](https://img.shields.io/badge/open_source-no-red)
-![Owner](https://img.shields.io/badge/owner-Samantha_Revita_%2B_Terry_Snyder-purple)
-![System](https://img.shields.io/badge/system-Elyria_Systems--VA-cyan)
-![15D+](https://img.shields.io/badge/15D%2B-standing_geometry-0f172a)
-![Boundary](https://img.shields.io/badge/boundary-pre_dispatch_admissibility-gold)
-![Proof](https://img.shields.io/badge/proof-receipt_%2B_replay-green)
-![NVIDIA](https://img.shields.io/badge/NVIDIA-facing_review_draft-76B900)
+**Pre-execution admission for governed compute.**
 
-Built by **Elyria Systems — VA**.
+Elyria Accelerator Fabric is the governed execution boundary for accelerator-class workloads.
 
-Copyright (c) 2026 **Samantha Revita** and **Terry Snyder**. All rights reserved.
+It does not assume that compute should run because a request exists.
+It resolves whether proposed motion has standing before it reaches consequence-bearing execution.
 
-This repository is a **protected public proof surface**. It is **not open source**.
+> Nothing runs without admission.
 
-![Elyria Accelerator Fabric](assets/accelerator_fabric_15d_hero.svg)
+---
 
-## Core claim
+## Core Position
 
-```text
-Nothing reaches accelerator execution unless standing resolves first.
+Most accelerator stacks optimize for throughput, scheduling, routing, and utilization.
 
-GPU availability is not execution admissibility.
-```
+That leaves a deeper failure mode unresolved:
 
-## What this is
+**Was the operation still admissible at the moment it became executable?**
 
-Elyria Accelerator Fabric is a **pre-dispatch admissibility boundary** for AI accelerator workloads.
+Elyria Accelerator Fabric targets that boundary.
 
-It determines whether a workload has standing to reach GPU execution under current authority, custody, policy, capacity, thermal, corridor, and replay conditions.
+Before accelerator-bound work is allowed to bind, the fabric evaluates whether the proposed execution remains valid under current authority, policy, state, constraint, capacity, and replay conditions.
 
-The goal is not to monitor compute after it begins.
+If standing holds, execution may proceed within scope.
 
-The goal is to decide whether consequence-bearing compute may be admitted before it runs.
+If standing fails, the system narrows, redirects, escalates, refuses, or halts before invalid compute becomes real.
 
-## What this is not
+---
 
-This is not GPU monitoring, observability, a dashboard, a scheduler replacement, a compliance wrapper, a generic AI safety label, a claim of NVIDIA partnership, a claim of CUDA-level integration, or a claim of fabricated hardware.
-
-## Public 15D+ standing geometry
+## Execution Model
 
 ```text
-authority · custody · evidence · state · policy
-continuity · revocation · risk · capacity · failure behavior
-receipt basis · replay basis · thermo-standing · corridor standing · standing decay
+REQUEST / WORKLOAD
+        |
+        v
+GOVERNED ADMISSION BOUNDARY
+        |
+        |-- EXECUTE   -> admitted compute binds to receipt
+        |-- REDIRECT  -> nearest admissible execution corridor
+        |-- ESCALATE  -> human / higher-authority review
+        |-- REFUSE    -> invalid motion does not execute
+        |-- HALT      -> contaminated or unsafe execution frame
+        v
+ACCELERATOR FABRIC
+        |
+        v
+RECEIPT + REPLAY VERIFICATION
 ```
 
-Accelerator-specific public extension:
+---
+
+## What This Is Not
+
+Elyria Accelerator Fabric is not:
+
+- a scheduler
+- a monitoring layer
+- a dashboard
+- a post-hoc audit tool
+- a generic orchestration wrapper
+- a policy document attached after execution
+
+It is a pre-effect governance layer for accelerator-bound execution.
+
+---
+
+## What This Enforces
+
+The fabric is designed around five boundary requirements:
+
+1. **Authority Standing**  
+   The actor, workload, or system must still have current authority to bind consequence.
+
+2. **State Admissibility**  
+   The live execution state must remain inside an admissible corridor.
+
+3. **Capacity and Burden Control**  
+   Execution must not exceed governed capacity, risk, latency, or burden limits.
+
+4. **Fail-Closed Resolution**  
+   Ambiguity, stale context, broken lineage, or unverifiable replay defaults away from execution.
+
+5. **Receipt-Bound Consequence**  
+   Admitted execution must produce a deterministic receipt that can be replayed under identical law, state, and input.
+
+---
+
+## Repository Visual Identity
+
+The visual identity should show streams of proposed compute approaching a boundary where not every stream passes.
+
+Some motion is admitted.
+Some is redirected.
+Some is refused.
+
+The core message:
+
+**Accelerator Fabric is not faster unchecked motion. It is governed admission into compute.**
+
+Recommended asset paths:
 
 ```text
-compute-lane standing · memory-pressure standing · tenant-partition standing
-fabric-link standing · scheduler-integrity standing · gradient-flow standing
-energy-debt standing · thermal-headroom standing · quiesce-capability standing · halt-authority standing
+assets/elyria-accelerator-fabric-banner.png
+assets/elyria-accelerator-fabric-card.png
 ```
 
-Public rule:
+Suggested banner text:
 
 ```text
-Show the geometry.
-Do not disclose the machinery.
+ELYRIA ACCELERATOR FABRIC
+Pre-Execution Admission for Governed Compute
 ```
 
-## Architecture
+Optional footer:
 
 ```text
-Workload Request
-  ↓
-Governed Workload Envelope
-  ↓
-Fabric Canonicalization
-  ↓
-15D+ Standing Geometry Resolver
-  ↓
-SMC / Accelerator Safety Fabric
-  ↓
-Dispatch Decision
-  ↓
-GPU / Fabric Execution only if admitted
-  ↓
-Receipt + Replay + Audit Chain
-  ↓
-Standing Decay Monitor
-  ↓
-Revoke / Halt / Quarantine / Rebound
+Veritas Aegis — Elyria Systems
 ```
 
-## Boundary outcomes
+---
+
+## Image Generation Prompt
 
 ```text
-EXECUTE
-REFUSE
-ESCALATE
-HALT
-THROTTLE
-FENCE
-QUARANTINE
-REVOKE_DISPATCH
-REBOUND
+Create a professional GitHub repository banner for “Elyria Accelerator Fabric”.
+
+Do not copy any existing logo or image. Use an original futuristic technical design.
+
+Visual concept:
+A dark high-contrast background with a governed accelerator fabric architecture. On the left, multiple luminous data/compute streams approach a central vertical admissibility boundary. At the boundary, some streams pass through cleanly, some are redirected, and some terminate or fade, showing pre-execution gating. On the right, admitted streams enter a sealed accelerator core / compute fabric node, suggesting GPU/accelerator infrastructure without using any real brand marks.
+
+Core symbolism:
+- execution is not assumed
+- compute is admitted before it runs
+- invalid motion fails closed
+- admitted motion binds to proof
+- deterministic receipt and replay layer implied through subtle hash/grid traces
+
+Style:
+sleek enterprise-grade cyber infrastructure, dark navy/black background, blue/cyan/violet energy gradients, crisp geometric lines, subtle depth, high-dimensional field structure, polished but not crowded, suitable for a public GitHub README hero image.
+
+Text:
+ELYRIA ACCELERATOR FABRIC
+Pre-Execution Admission for Governed Compute
+
+Optional small footer text:
+Veritas Aegis — Elyria Systems
+
+Composition:
+wide 16:9 banner, centered architecture diagram, clean negative space, no people, no faces, no stock-photo look, no random sci-fi clutter, no copied logo marks, no NVIDIA/AMD/CUDA/ROCm logos.
 ```
 
-Only `EXECUTE` permits accelerator dispatch.
+---
 
-## Run the proof
+## Status
 
-```bash
-python accelerator_fabric_validator.py examples/valid_inference_workload.json
-python accelerator_fabric_validator.py examples/revoked_authority_workload.json
-python accelerator_fabric_validator.py examples/thermal_halt_workload.json
-python accelerator_fabric_validator.py examples/replay_missing_workload.json
-python accelerator_fabric_validator.py examples/standing_decay_workload.json
-python test_accelerator_fabric_validator.py
-```
+Initial public repository identity surface established.
 
-## Expected public proof corridor
+Next build layer:
 
-| Fixture | Expected outcome | Fabric action |
-|---|---|---|
-| valid workload | EXECUTE | ALLOW_DISPATCH |
-| revoked authority | REFUSE | BLOCK_DISPATCH |
-| thermal critical | HALT | STOP_EXECUTION |
-| capacity degraded | THROTTLE | NARROW_OR_REVIEW |
-| replay missing | HALT | BLOCK_CERTIFICATION |
-| standing decay | REVOKE_DISPATCH | REVOKE_OR_REBOUND |
+- governed workload envelope
+- admissibility resolver
+- accelerator-bound decision receipt
+- deterministic replay verifier
+- README hero asset
+- proof-pack examples
 
-## Final build statement
+---
 
-```text
-Elyria Accelerator Fabric is a 15D+ accelerator consequence-boundary fabric where hardware monitoring, fixed-point safety debt, thermo-standing, corridor standing, receipt/replay, and fail-closed dispatch control converge.
+## Governance Frame
 
-The SMC does not merely observe GPU safety.
+Execution is not assumed.
 
-It becomes the non-bypassable enforcement witness for whether accelerator-bound consequence was admissible before it ran.
-```
+It is admitted.
+
+Nothing persists without validation.
+
+Truth must be replayable.
