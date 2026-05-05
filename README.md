@@ -153,6 +153,14 @@ python accelerator_fabric_validator.py examples/capacity_degraded_workload.json
 python test_accelerator_fabric_validator.py
 ```
 
+Expected final line:
+
+```text
+ALL ACCELERATOR FABRIC PROOFS PASSED
+```
+
+See [`PROOF_REPORT.md`](./PROOF_REPORT.md) for the public proof corridor.
+
 ## Expected public proof corridor
 
 | Fixture | Expected outcome | Fabric action |
@@ -168,6 +176,7 @@ python test_accelerator_fabric_validator.py
 
 ```text
 README.md
+PROOF_REPORT.md
 ACCELERATOR_FABRIC_MODEL.md
 WORKLOAD_ENVELOPE.md
 15D_ACCELERATOR_STANDING_GEOMETRY.md
