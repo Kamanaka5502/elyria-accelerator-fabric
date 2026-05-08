@@ -141,36 +141,34 @@ REBOUND
 
 Only `EXECUTE` permits accelerator dispatch.
 
-## Run the proof
+## Public proof status
 
-```bash
-python accelerator_fabric_validator.py examples/valid_inference_workload.json
-python accelerator_fabric_validator.py examples/revoked_authority_workload.json
-python accelerator_fabric_validator.py examples/thermal_halt_workload.json
-python accelerator_fabric_validator.py examples/replay_missing_workload.json
-python accelerator_fabric_validator.py examples/standing_decay_workload.json
-python accelerator_fabric_validator.py examples/capacity_degraded_workload.json
-python test_accelerator_fabric_validator.py
-```
+This repository exposes a **review-safe proof surface**, not the protected enforcement machinery.
 
-Expected final line:
+The public surface is allowed to show:
 
 ```text
-ALL ACCELERATOR FABRIC PROOFS PASSED
+scenario fixtures
+expected outcomes
+receipt shape
+replay basis
+non-implementation boundaries
+integration surfaces
+standing dimensions
+failure semantics
 ```
 
-See [`PROOF_REPORT.md`](./PROOF_REPORT.md) for the public proof corridor.
+The public surface does **not** disclose:
 
-## Expected public proof corridor
-
-| Fixture | Expected outcome | Fabric action |
-|---|---|---|
-| valid workload | EXECUTE | ALLOW_DISPATCH |
-| revoked authority | REFUSE | BLOCK_DISPATCH |
-| thermal critical | HALT | STOP_EXECUTION |
-| capacity degraded | THROTTLE | NARROW_OR_REVIEW |
-| replay missing | HALT | BLOCK_CERTIFICATION |
-| standing decay | REVOKE_DISPATCH | REVOKE_OR_REBOUND |
+```text
+private law bundles
+production policy compilers
+customer-specific evidence envelopes
+kernel-level hooks
+protected admission internals
+hardware enforcement machinery
+NDA-bound implementation details
+```
 
 ## Reviewer path
 
@@ -190,6 +188,23 @@ NVIDIA_PUBLIC_INTEGRATION_SURFACES.md
 NON_IMPLEMENTATION_BOUNDARY.md
 PROTECTED_SCOPE.md
 ```
+
+## Expected public proof corridor
+
+| Fixture | Expected outcome | Fabric action |
+|---|---|---|
+| valid workload | EXECUTE | ALLOW_DISPATCH |
+| revoked authority | REFUSE | BLOCK_DISPATCH |
+| thermal critical | HALT | STOP_EXECUTION |
+| capacity degraded | THROTTLE | NARROW_OR_REVIEW |
+| replay missing | HALT | BLOCK_CERTIFICATION |
+| standing decay | REVOKE_DISPATCH | REVOKE_OR_REBOUND |
+
+## Review boundary
+
+If a runnable public harness is included in this repository, use the commands documented in that harness or workflow.
+
+If no public harness is present, this repository should be reviewed as a protected architecture and proof-corridor surface only. Absence of private runtime code is intentional and does not grant permission to infer, reproduce, or derive the protected machinery.
 
 ## Final build statement
 
